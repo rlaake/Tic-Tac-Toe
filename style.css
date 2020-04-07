@@ -7,10 +7,12 @@ body {
     height: 100vh;
     display: grid;
     background-color: #d5d5d5;
-    grid-template-rows: 1fr 8fr 0.5fr;
+    grid-template-rows: 0.5fr 8fr 0.5fr;
 }
 
 header {
+    display: flex;
+    justify-content: space-evenly;
 }
 
 #board-wrapper { 
@@ -18,8 +20,8 @@ header {
     background-color: black;
     position: relative;
     text-align: center;
-    width: 50vw;
-    height: 50vw;
+    width: 60vw;
+    height: 60vw;
 }
 
 #board {
@@ -29,6 +31,15 @@ header {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 1%;
+}
+
+.name {
+    align-self: center;
+    padding: .2em;
+}
+
+.isTurn {
+    background-color: rgba(0,0,0,0.2);
 }
 
 .square {
