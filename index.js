@@ -56,14 +56,59 @@ const gameController = (() => {
         const squares = document.querySelectorAll(".square");
         const players = document.getElementsByClassName('player-names');
         const header = document.getElementsByTagName('header');
+        const paths = document.getElementsByTagName('path');
         const playerNames = [];
+
     
         const placeMark = (mark, location) => {
             squares[location].classList.add(mark);
         }
     
-        const drawLine = (squares) => {
-    
+        const drawLine = (combo) => {
+            let targetId = '';
+            let targetClass = '';
+            if (combo[0] === 0 && combo[1] === 1){
+                targetId = 'hp-1';
+                targetClass = 'horiz-path';
+            }
+            else if (combo[0] === 3 && combo[1] === 4){
+                targetId = 'hp-2';
+                targetClass = 'horiz-path';
+            }
+            else if (combo[0] === 6 && combo[1] === 7){
+                targetId = 'hp-3';
+                targetClass = 'horiz-path';
+            }
+            else if (combo[0] === 0 && combo[1] === 3){
+                targetId = 'vp-1';
+                targetClass = 'vert-path';
+            }
+            else if (combo[0] === 1 && combo[1] ===4 ){
+                targetId = 'vp-2';
+                targetClass = 'vert-path';
+            }
+            else if (combo[0] === 2 && combo[1] === 5){
+                targetId = 'vp-3';
+                targetClass = 'vert-path';
+            }
+            else if (combo[0] === 0 && combo[2] === 8){
+                targetId = 'bksh';
+                targetClass = 'bk-slh-path';
+            }
+            else if (combo[0] === 2 && combo[2] === 6){
+                targetId = 'fdsh';
+                targetClass = 'fd-slh-path';
+            }
+
+            for (let path of paths) {
+                if (path.id === targetId) {
+                    path.style.visibility='visible';
+                }
+                if (path.classList[0] === targetClass) {
+                    path.style.animation=targetClass + ' 1s linear forwards';
+                }
+            }
+        
         }
     
         const clearBoard = () => {
@@ -71,6 +116,12 @@ const gameController = (() => {
                 square.classList.remove('x');
                 square.classList.remove('o');
             });
+            for (let path of paths) {
+                path.style.visibility='hidden';
+                if (path.style.animation !== "") {
+                    path.style.animation = "";
+                }
+            }
         }
     
         const updateNames = (player1, player2) => {
